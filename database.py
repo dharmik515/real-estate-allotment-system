@@ -44,9 +44,6 @@ class AllotmentDatabase:
         if 'total_podiums' not in existing_cols:
             cursor.execute('ALTER TABLE projects ADD COLUMN total_podiums INTEGER DEFAULT 0')
 
-        # Heal legacy 'Active' status left over from the old buggy unfreeze.
-        cursor.execute("UPDATE allotments SET status = 'Issued' WHERE status = 'Active'")
-        
         # Allotments table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS allotments (
@@ -98,7 +95,11 @@ class AllotmentDatabase:
                 FOREIGN KEY (allotment_id) REFERENCES allotments (id)
             )
         ''')
-        
+
+        # Heal legacy 'Active' status left over from the old buggy unfreeze.
+        # Must run after the allotments table has been created.
+        cursor.execute("UPDATE allotments SET status = 'Issued' WHERE status = 'Active'")
+
         conn.commit()
         conn.close()
     
