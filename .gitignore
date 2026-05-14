@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- Business data (DO NOT COMMIT) ---
+# Live SQLite database with real client records
+allotments.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated allotment letters containing real client PAN / Aadhar / bank details
+Allotment_Letters/
+
+# Loose DOCX samples at the repo root (real client data)
+/*.docx
